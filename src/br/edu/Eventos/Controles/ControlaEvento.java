@@ -9,10 +9,23 @@ import br.edu.Eventos.Modelos.Evento;
 
 public class ControlaEvento {
 
-	
+	ConectaBanco conecta = new ConectaBanco();
 	public void inserir(Evento e)throws SQLException{
 		
-		Connection con= ConectaBanco.createConnection();
+		
+		conecta.inserirEvento(e);
+	};
+	
+public void deletar(String nome)throws SQLException{
+		
+		
+		conecta.deletarEvento(nome);
+	};
+	
+public void atualizar(Evento e)throws SQLException{
+		
+		
+		conecta.atualizarEvento(e);
 	};
 	
 	
