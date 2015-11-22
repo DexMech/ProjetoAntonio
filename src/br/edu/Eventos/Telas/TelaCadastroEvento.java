@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.edu.Eventos.Controles.ControlaEvento;
+import br.edu.Eventos.Controles.ControlaItem;
 import br.edu.Eventos.Modelos.Evento;
 
 import javax.swing.JLabel;
@@ -13,6 +15,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -23,11 +28,11 @@ public class TelaCadastroEvento extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private List<String> list;
+
 	
 	private Evento evento;
-	
+	private ControlaEvento eventoControle;
+	private ControlaItem itemControle;
 	private JPanel contentPane;
 	
 	private JTextField textnNomeEvento;
@@ -39,6 +44,7 @@ public class TelaCadastroEvento extends JFrame {
 	private JTextField textHInicio;
 	private JTextField textHFim;
 	private JTextField textFuncionario;
+	private SimpleDateFormat ds;
 
 	/**
 	 * Launch the application.
@@ -60,7 +66,9 @@ public class TelaCadastroEvento extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroEvento() {
-		list = new ArrayList<String>();
+		itemControle = new ControlaItem();
+		eventoControle = new ControlaEvento();
+		ds = new SimpleDateFormat("DD/MM/YYYY");
 		evento = new Evento();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 661, 633);
@@ -197,11 +205,26 @@ public class TelaCadastroEvento extends JFrame {
 		JButton btnSalvar = new JButton("SALVAR");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evento.setData(textData.getText());
+				
+				try {
+					evento.setData(ds.parse(textData.getText()));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				evento.setHoraFim(textHFim.getText());
 				evento.setHoraInicio(textHInicio.getText());
 				evento.setNome(textnNomeEvento.getText());
-				evento.setOpcionais(list);
+				evento.setSolicitante(textSolicitante.getText());
+				evento.setRamal(textRamal.getText());
+				
+				try {
+					eventoControle.inserir(evento);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnSalvar.setBounds(465, 541, 122, 23);

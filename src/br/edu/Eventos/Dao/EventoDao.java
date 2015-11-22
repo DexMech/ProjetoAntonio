@@ -11,7 +11,7 @@ import br.edu.Eventos.Modelos.Evento;
 public class EventoDao {
 	public void inserirEvento(Evento e) throws SQLException{
 
-		String pegadata;
+		
 		Connection con = ControlaBanco.createConnection();
 		String sql = "INSERT INTO evento " +
 				"(nome,solicitante,setor,ramal,data,local,"
