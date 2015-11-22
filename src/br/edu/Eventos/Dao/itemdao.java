@@ -14,7 +14,7 @@ public class itemdao {
 
 
 		Connection con = ControlaBanco.createConnection();
-		String sql = "INSERT INTO evento " +
+		String sql = "INSERT INTO item " +
 				"(nome,solicitante,setor,ramal,data,local,"
 				+   "prioridade,horainicio,horafim,observacao) " +
 				"values (?,?,?,?,?,?,?,?,?,?)";
@@ -31,20 +31,21 @@ public class itemdao {
 	}
 	public void deletarItem(String nome) throws SQLException{
 		Connection con = ControlaBanco.createConnection();
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
+		String sql = "DELETE FROM item " +
+				"WHERE pats =" +
+				"?";
 		PreparedStatement smt = con.prepareStatement(sql);
-
+		smt.setString(1, nome );
+		JOptionPane.showMessageDialog(null, "Deletado com sucesso!!");
 
 	}
 	public void atualizarItem(Item e)throws SQLException{
 		Connection con = ControlaBanco.createConnection();
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
+		String sql = "UPDATE item " +
+				"set nome=?,email=?,endereco=?,dataNascimento=? " +
+				"WHERE cond = ?";
 		PreparedStatement smt = con.prepareStatement(sql);
-
+		JOptionPane.showMessageDialog(null, "Atualizado com sucesso!!");
 
 	}
 }

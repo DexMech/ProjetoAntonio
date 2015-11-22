@@ -11,7 +11,7 @@ import br.edu.Eventos.Modelos.Evento;
 public class EventoDao {
 	public void inserirEvento(Evento e) throws SQLException{
 
-		
+
 		Connection con = ControlaBanco.createConnection();
 		String sql = "INSERT INTO evento " +
 				"(nome,solicitante,setor,ramal,data,local,"
@@ -43,20 +43,19 @@ public class EventoDao {
 	}
 	public void deletarEvento(String nome) throws SQLException{
 		Connection con = ControlaBanco.createConnection();
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
+		String sql = "DELETE FROM evento " +
+				"WHERE nome = ?";
 		PreparedStatement smt = con.prepareStatement(sql);
-
+		JOptionPane.showMessageDialog(null, "Deletado com sucesso");
 
 	}
 	public void atualizarEvento(Evento e)throws SQLException{
 		Connection con = ControlaBanco.createConnection();
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
+		String sql = "UPDATE evento" +
+				"SET nome=?,email=?,endereco=?,dataNascimento=? " +
+				"WHERE cond=? ";
 		PreparedStatement smt = con.prepareStatement(sql);
-
+		JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
 	}
 }
