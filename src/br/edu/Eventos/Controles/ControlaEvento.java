@@ -1,15 +1,15 @@
 package br.edu.Eventos.Controles;
 
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
 
-import br.edu.Eventos.Dao.ConectaBanco;
+import br.edu.Eventos.Dao.ControlaBanco;
 import br.edu.Eventos.Modelos.Evento;
 
 public class ControlaEvento {
 
-	ConectaBanco conecta = new ConectaBanco();
+	ControlaBanco conecta = new ControlaBanco();
 	public void inserir(Evento e)throws SQLException{
 		
 		

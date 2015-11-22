@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.edu.Eventos.Controles.ControlaEvento;
 import br.edu.Eventos.Modelos.Evento;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,7 +17,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +31,7 @@ public class TelaCadastroEvento extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private SimpleDateFormat date ;
 	private List<String> list;
 	private Evento evento;
 	private JPanel contentPane;
@@ -38,6 +44,8 @@ public class TelaCadastroEvento extends JFrame {
 	private JTextField textHInicio;
 	private JTextField textHFim;
 	private JTextField textFuncionario;
+	private ControlaEvento eventoControle;
+	private JComboBox comboBoxAuditorio;
 
 	/**
 	 * Launch the application.
@@ -59,6 +67,8 @@ public class TelaCadastroEvento extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroEvento() {
+	    date = new SimpleDateFormat("dd/mm/yyyy");
+		eventoControle = new ControlaEvento();
 		list = new ArrayList<String>();
 		evento = new Evento();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,22 +189,37 @@ public class TelaCadastroEvento extends JFrame {
 		contentPane.add(btnAlterar);
 		
 		JComboBox comboBoxPredio = new JComboBox();
+		comboBoxPredio.setModel(new DefaultComboBoxModel(new String[] { "", "terreo", "2","3","4","5" }));
 		comboBoxPredio.setBounds(104, 58, 97, 20);
 		contentPane.add(comboBoxPredio);
 
 		JButton btnSalvar = new JButton("SALVAR");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				evento.setData(textData.getText());
+				try {
+					evento.setData(date.parse(textData.getText()));
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				evento.setHoraFim(textHFim.getText());
 				evento.setHoraInicio(textHInicio.getText());
-				evento.setLocal(comboBoxPredio.getName());
+				evento.setLocal(comboBoxPredio.getSelectedItem().toString());
 				evento.setNome(textnNomeEvento.getText());
 				evento.setObservacao(textObservacao.getText());
-				list.add(chckbxMicrofone.getName());
-				list.add(chckbxPassador.getName());
-				list.add(chckbxPrensenca.getName());
-				evento.setOpcionais(list);
+				evento.setSetor(textSetor.getText());
+				evento.setRamal(textRamal.getText());
+				evento.setSolicitante(textSolicitante.getText());
+				evento.setPrioridade(comboBoxPrioridade.getSelectedItem().toString());
+				evento.setAuditorio(comboBoxAuditorio.getSelectedItem().toString());
+				
+				
+				try {
+					eventoControle.inserir(evento);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -220,8 +245,9 @@ public class TelaCadastroEvento extends JFrame {
 		lblAuditorio.setBounds(434, 61, 70, 14);
 		contentPane.add(lblAuditorio);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(505, 61, 76, 20);
-		contentPane.add(comboBox);
+		 comboBoxAuditorio = new JComboBox();
+		comboBoxAuditorio.setModel(new DefaultComboBoxModel(new String[] { "", "1", "2","3","4","5" }));
+		comboBoxAuditorio.setBounds(505, 61, 76, 20);
+		contentPane.add(comboBoxAuditorio);
 	}
 }
