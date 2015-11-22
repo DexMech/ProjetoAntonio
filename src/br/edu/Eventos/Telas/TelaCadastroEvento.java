@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.edu.Eventos.Controles.ControlaEvento;
-import br.edu.Eventos.Controles.ControlaItem;
 import br.edu.Eventos.Modelos.Evento;
 
 import javax.swing.JLabel;
@@ -18,9 +17,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 
 public class TelaCadastroEvento extends JFrame {
@@ -32,7 +30,6 @@ public class TelaCadastroEvento extends JFrame {
 	
 	private Evento evento;
 	private ControlaEvento eventoControle;
-	private ControlaItem itemControle;
 	private JPanel contentPane;
 	
 	private JTextField textnNomeEvento;
@@ -45,6 +42,8 @@ public class TelaCadastroEvento extends JFrame {
 	private JTextField textHFim;
 	private JTextField textFuncionario;
 	private SimpleDateFormat ds;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -66,7 +65,6 @@ public class TelaCadastroEvento extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroEvento() {
-		itemControle = new ControlaItem();
 		eventoControle = new ControlaEvento();
 		ds = new SimpleDateFormat("DD/MM/YYYY");
 		evento = new Evento();
@@ -110,7 +108,7 @@ public class TelaCadastroEvento extends JFrame {
 		contentPane.add(lblPrioridade);
 		
 		JLabel lblSala = new JLabel("Sala");
-		lblSala.setBounds(237, 102, 39, 14);
+		lblSala.setBounds(258, 102, 39, 14);
 		contentPane.add(lblSala);
 
 		JLabel lblAuditorio = new JLabel("Auditorio");
@@ -118,7 +116,7 @@ public class TelaCadastroEvento extends JFrame {
 		contentPane.add(lblAuditorio);
 		
 		JLabel lblData = new JLabel("Data");
-		lblData.setBounds(237, 70, 39, 14);
+		lblData.setBounds(258, 70, 39, 14);
 		contentPane.add(lblData);
 
 		JLabel lblObservacao = new JLabel("OBSERVACAO");
@@ -159,7 +157,7 @@ public class TelaCadastroEvento extends JFrame {
 		textSolicitante.setColumns(10);
 
 		textSetor = new JTextField();
-		textSetor.setBounds(374, 36, 86, 20);
+		textSetor.setBounds(384, 36, 76, 20);
 		contentPane.add(textSetor);
 		textSetor.setColumns(10);
 
@@ -169,17 +167,17 @@ public class TelaCadastroEvento extends JFrame {
 		textRamal.setColumns(10);
 
 		textSala = new JTextField();
-		textSala.setBounds(275, 96, 96, 20);
+		textSala.setBounds(309, 99, 96, 20);
 		contentPane.add(textSala);
 		textSala.setColumns(10);
 
 		textData = new JTextField();
-		textData.setBounds(275, 67, 93, 20);
+		textData.setBounds(310, 67, 95, 20);
 		contentPane.add(textData);
 		textData.setColumns(10);
 
 		textHInicio = new JTextField();
-		textHInicio.setBounds(117, 128, 76, 20);
+		textHInicio.setBounds(121, 128, 76, 20);
 		contentPane.add(textHInicio);
 		textHInicio.setColumns(10);
 
@@ -229,6 +227,20 @@ public class TelaCadastroEvento extends JFrame {
 		});
 		btnSalvar.setBounds(465, 541, 122, 23);
 		contentPane.add(btnSalvar);
+		
+		textField = new JTextField();
+		textField.setBounds(121, 64, 130, 26);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(121, 93, 114, 26);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(83, 205, 76, 27);
+		contentPane.add(comboBox);
 		
 	}
 }

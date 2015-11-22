@@ -18,18 +18,21 @@ import java.awt.Color;
 
 
 
+
+import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
-
 import javax.swing.border.LineBorder;
 
 public class TelaTempoReal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table_1;
+	private JTable tabelaEventos;
+	
+	private ButtonGroup  btnGroup;
 
 	/**
 	 * Launch the application.
@@ -103,6 +106,11 @@ public class TelaTempoReal extends JFrame {
 		rdbtnSala.setBounds(178, 59, 141, 23);
 		panel.add(rdbtnSala);
 		
+		btnGroup = new ButtonGroup();
+		btnGroup.add(rdbtnNomeDoEvento);
+		btnGroup.add(rdbtnHoraDeInicio);
+		btnGroup.add(rdbtnSala);
+		
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(24, 261, 698, 20);
 		contentPane.add(progressBar);
@@ -111,15 +119,15 @@ public class TelaTempoReal extends JFrame {
 		scrollPane.setBounds(24, 155, 698, 100);
 		contentPane.add(scrollPane);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		tabelaEventos = new JTable();
+		tabelaEventos.setModel(new DefaultTableModel(
 				new Object[][]{
 				},
 				new String[]{
 						"Evento","Func. Respons.", "Sala", "Inicio", "Fim", "Status"
 				}));
 
-		scrollPane.setViewportView(table_1);
+		scrollPane.setViewportView(tabelaEventos);
 		
 		JLabel lblInicio = new JLabel("Inicio");
 		lblInicio.setBounds(24, 293, 46, 16);
@@ -133,20 +141,20 @@ public class TelaTempoReal extends JFrame {
 		lblPrevisto.setForeground(new Color(255, 215, 0));
 		lblPrevisto.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblPrevisto.setVisible(false);
-		lblPrevisto.setBounds(590, 43, 61, 16);
+		lblPrevisto.setBounds(590, 43, 78, 16);
 		contentPane.add(lblPrevisto);
 		
 		JLabel lblAcontecendo = new JLabel("Acontecendo");
 		lblAcontecendo.setForeground(new Color(0, 128, 0));
 		lblAcontecendo.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblAcontecendo.setBounds(590, 43, 61, 16);
+		lblAcontecendo.setBounds(590, 43, 117, 16);
 		lblAcontecendo.setVisible(false);
 		contentPane.add(lblAcontecendo);
 		
 		JLabel lblEncerrado = new JLabel("Encerrado");
 		lblEncerrado.setForeground(new Color(255, 0, 0));
 		lblEncerrado.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblEncerrado.setBounds(590, 43, 61, 16);
+		lblEncerrado.setBounds(590, 43, 94, 16);
 		lblEncerrado.setVisible(false);
 		contentPane.add(lblEncerrado);
 		
