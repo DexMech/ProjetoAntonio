@@ -26,22 +26,32 @@ public class ControlaEvento {
 		try {
 			dao.inserirEvento(e);
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 	}
 	
 
-	public void deletar(String nome)throws SQLException{
+	public void deletar(String nome){
 
 
-		dao.deletarEvento(nome);
+		try {
+			dao.deletarEvento(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	};
 
-	public void atualizar(Evento e,String nome)throws SQLException{
+	public void atualizar(Evento e,String nome){
 
 
-		dao.atualizarEvento(e,nome);
+		try {
+			dao.atualizarEvento(e,nome);
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
 	}
 
 

@@ -1,15 +1,14 @@
 package br.edu.Eventos.Dao;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
 
 import javax.swing.JOptionPane;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 
 import br.edu.Eventos.Modelos.Evento;
 
@@ -24,7 +23,7 @@ public class ControlaBanco {
 
 	public void inserirEvento(Evento e) throws SQLException{
 		
-		String pegadata;
+		
 		Connection con = ControlaBanco.createConnection();
 		String sql = "INSERT INTO evento " +
 				"(nome,solicitante,setor,ramal,data,local,"
@@ -53,29 +52,15 @@ public class ControlaBanco {
 		JOptionPane.showMessageDialog(null, "Inserido com sucesso!!");
 
 
-	}/*
-	public void deletarEvento(String nome) throws SQLException{
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
-		PreparedStatement smt = con.prepareStatement(sql);
-
-
 	}
-	public void atualizarEvento(Evento e)throws SQLException{
-		String sql = "insert into contatos " +
-				"(nome,email,endereco,dataNascimento) " +
-				"values (?,?,?,?)";
-		PreparedStatement smt = con.prepareStatement(sql);
-
-
-	}*/
+	
 
 	public static Connection createConnection() {
 
 		Connection conexao = null;
 		try {
 			conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+			
 		} catch (SQLException e) {
 
 		}

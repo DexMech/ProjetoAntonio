@@ -14,9 +14,33 @@ public class EventoDao {
 
 
 		Connection con = ControlaBanco.createConnection();
+		String inicio ="  CREATE TABLE IF NOT EXISTS `evento` ("
+  +"`idevento` int(11) NOT NULL AUTO_INCREMENT,"
+  +"`nome` varchar(45) NOT NULL,"
+  +"`solicitante` varchar(45) NOT NULL,"
+  +"`setor` varchar(45) NOT NULL,"
+  +"`ramal` varchar(45) NOT NULL,"
+  +"`data` date NOT NULL,"
+  +"`local` varchar(45) NOT NULL,"
+  +"`prioridade` varchar(45) NOT NULL,"
+  +"`horainicio` time NOT NULL,"
+  +"`horafim` time NOT NULL,"
+  +"`observacao` varchar(45) DEFAULT NULL,"
+  +"`microfone` tinyint(1) NOT NULL,"
+  +"`passador` tinyint(1) NOT NULL,"
+  +"`funcionario` varchar(45) NOT NULL,"
+  +"`sala` varchar(10) NOT NULL,"
+  +"PRIMARY KEY (`idevento`),"
+  +"UNIQUE KEY `idevento_UNIQUE` (`idevento`)"
++") ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;";
+		PreparedStatement s = con.prepareStatement(inicio);
+		s.execute();
+		s.close();
+
+
 		String sql = "INSERT INTO evento " +
 				"(nome,solicitante,setor,ramal,data,local,"
-				+   "prioridade,horainicio,horafim,observacao,mouse,passador,funcionario,sala) " +
+				+   "prioridade,horainicio,horafim,observacao,microfone,passador,funcionario,sala) " +
 				"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement smt = con.prepareStatement(sql);
 		smt.setString(1, e.getNome());
@@ -52,22 +76,23 @@ public class EventoDao {
 				"WHERE nome = ?";
 		PreparedStatement smt = con.prepareStatement(sql);
 		smt.setString(1, nome);
-		 smt.execute();
+		smt.execute();
 		JOptionPane.showMessageDialog(null, "Deletado com sucesso");
 
 	}
 	public void atualizarEvento(Evento e,String nome)throws SQLException{
 		Connection con = ControlaBanco.createConnection();
 		String sql = "UPDATE evento" +
-				"SET email=?,endereco=?,dataNascimento=? " +
-				"WHERE cond=? ";
+				" SET solicitante=?,setor=?,ramal=?,data=?,local=?,prioridade=?,horainicio=?,horafim=?,"
+				+ " observacao=?,microfone=?,passador=?,funcionario=?,sala=?" +
+				" WHERE nome=?" ;
 		PreparedStatement smt = con.prepareStatement(sql);
 		smt.setString(1, e.getSolicitante());
 		smt.setString(2, e.getSetor());
 		smt.setString(3, e.getRamal());
 		long ms = e.getData().getTime();
 		java.sql.Date ds = new java.sql.Date( ms );
-		smt.setDate(5, ds);
+		smt.setDate(4, ds);
 		smt.setString(5, e.getLocal());
 		smt.setString(6, e.getPrioridade());
 		smt.setString(7, e.getHoraInicio());
@@ -75,6 +100,11 @@ public class EventoDao {
 		smt.setString(9, e.getObservacao());
 		smt.setBoolean(10, e.isMicrofone());
 		smt.setBoolean(11, e.isPassador());
+		smt.setString(12,e.getFuncionario());
+		smt.setString(13, e.getSala());
+		smt.setString(14, nome);
+		smt.execute();
+		smt.close();
 		JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
 	}
@@ -83,10 +113,10 @@ public class EventoDao {
 		String sql ="SELECT * FROM evento WHERE +"+cond+" = ?";
 		PreparedStatement smt = con.prepareStatement(sql);
 		smt.setString(1, valor);
-		
+
 		ResultSet resultado = smt.executeQuery();
-		
-		
+
+
 		smt.execute();
 		smt.close();
 		return resultado;

@@ -1,5 +1,5 @@
 package br.edu.Eventos.Telas;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,23 +7,21 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import br.edu.Eventos.Controles.ControlaEvento;
-import br.edu.Eventos.Dao.ControlaBanco;
 
-import javax.swing.JLabel;
+
+
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 
-import javax.swing.JProgressBar;
+
+
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -38,6 +36,11 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 
 public class TelaTempoReal extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JRadioButton rdbtnSala,rdbtnNomeDoEvento,rdbtnHoraDeInicio;
 	private ControlaEvento evento;
 	private JPanel contentPane;
@@ -55,6 +58,7 @@ public class TelaTempoReal extends JFrame {
 	public TelaTempoReal() {
 
 		super("Eventos Tempo Real");
+	
 		setVisible(true);
 		setResizable(false);
 		evento = new ControlaEvento();
@@ -101,7 +105,7 @@ public class TelaTempoReal extends JFrame {
 					while(resultado.next()){
 
 						modeloTable.addRow(new Object[]{resultado.getString("nome"),resultado.getString("funcionario"),
-								resultado.getString("sala"),resultado.getString("horainicio"),
+								resultado.getString("data"),resultado.getString("sala"),resultado.getString("horainicio"),
 								resultado.getString("horafim"),
 								resultado.getString("mouse"),resultado.getString("passador")});
 					}
@@ -141,7 +145,7 @@ public class TelaTempoReal extends JFrame {
 				new Object[][]{
 				},
 				new String[]{
-						"Evento","Func. Respons.", "Sala", "Inicio", "Fim", "Microfone","Passador"
+						"Evento","Responsável","Data", "Sala", "Inicio", "Fim", "Microfone","Passador"
 				}));
 
 		scrollPane.setViewportView(tabelaEventos);
