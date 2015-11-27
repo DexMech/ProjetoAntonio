@@ -8,7 +8,7 @@ import javax.swing.text.MaskFormatter;
 
 import br.edu.Eventos.Controles.ControlaEvento;
 
-import br.edu.Eventos.Controles.ControlaItem;
+
 
 
 import br.edu.Eventos.Modelos.Evento;
@@ -57,7 +57,7 @@ public class TelaCadastroEvento extends JFrame {
 	private JTextField textRamal;
 	private JTextField textSala;
 	private JTextField textFuncionario;
-	private ControlaItem itemControle;
+	
 
 	private SimpleDateFormat ds;
 	private JTextField textAudi;
@@ -65,21 +65,7 @@ public class TelaCadastroEvento extends JFrame {
 	private JComboBox comboBoxPri;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastroEvento frame = new TelaCadastroEvento();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -99,13 +85,14 @@ public class TelaCadastroEvento extends JFrame {
 		eventoControle = new ControlaEvento();
 		list = new ArrayList<String>();
 
-		itemControle = new ControlaItem();
 
 		eventoControle = new ControlaEvento();
 		ds = new SimpleDateFormat("DD/MM/YYYY");
 
 		evento = new Evento();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 661, 633);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -211,10 +198,32 @@ public class TelaCadastroEvento extends JFrame {
 
 
 		JButton btnExcluir = new JButton("EXCLUIR");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					if(!(textnNomeEvento.getText()==""))
+					eventoControle.deletar(textnNomeEvento.getText());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnExcluir.setBounds(67, 541, 122, 23);
 		contentPane.add(btnExcluir);
 
 		JButton btnAlterar = new JButton("ALTERAR");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					eventoControle.atualizar(evento,textnNomeEvento.getText());
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnAlterar.setBounds(265, 541, 122, 23);
 		contentPane.add(btnAlterar);
 

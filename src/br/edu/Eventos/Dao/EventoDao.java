@@ -51,15 +51,30 @@ public class EventoDao {
 		String sql = "DELETE FROM evento " +
 				"WHERE nome = ?";
 		PreparedStatement smt = con.prepareStatement(sql);
+		smt.setString(1, nome);
+		 smt.execute();
 		JOptionPane.showMessageDialog(null, "Deletado com sucesso");
 
 	}
-	public void atualizarEvento(Evento e)throws SQLException{
+	public void atualizarEvento(Evento e,String nome)throws SQLException{
 		Connection con = ControlaBanco.createConnection();
 		String sql = "UPDATE evento" +
-				"SET nome=?,email=?,endereco=?,dataNascimento=? " +
+				"SET email=?,endereco=?,dataNascimento=? " +
 				"WHERE cond=? ";
 		PreparedStatement smt = con.prepareStatement(sql);
+		smt.setString(1, e.getSolicitante());
+		smt.setString(2, e.getSetor());
+		smt.setString(3, e.getRamal());
+		long ms = e.getData().getTime();
+		java.sql.Date ds = new java.sql.Date( ms );
+		smt.setDate(5, ds);
+		smt.setString(5, e.getLocal());
+		smt.setString(6, e.getPrioridade());
+		smt.setString(7, e.getHoraInicio());
+		smt.setString(8, e.getHoraFim());
+		smt.setString(9, e.getObservacao());
+		smt.setBoolean(10, e.isMicrofone());
+		smt.setBoolean(11, e.isPassador());
 		JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
 	}

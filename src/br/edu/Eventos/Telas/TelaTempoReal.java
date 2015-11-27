@@ -49,30 +49,16 @@ public class TelaTempoReal extends JFrame {
 
 	private ButtonGroup  btnGroup;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaTempoReal frame = new TelaTempoReal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
+
+	
 	public TelaTempoReal() {
 
 		super("Eventos Tempo Real");
+		setVisible(true);
+		setResizable(false);
 		evento = new ControlaEvento();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 750, 420);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("AA");
@@ -155,14 +141,10 @@ public class TelaTempoReal extends JFrame {
 				new Object[][]{
 				},
 				new String[]{
-						"Evento","Func. Respons.", "Sala", "Inicio", "Fim", "Mouse","Passador"
+						"Evento","Func. Respons.", "Sala", "Inicio", "Fim", "Microfone","Passador"
 				}));
 
 		scrollPane.setViewportView(tabelaEventos);
-
-		JLabel lblFim = new JLabel("Fim");
-		lblFim.setBounds(683, 293, 39, 16);
-		contentPane.add(lblFim);
 
 	}
 

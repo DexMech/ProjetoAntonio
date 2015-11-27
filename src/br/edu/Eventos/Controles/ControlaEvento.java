@@ -38,10 +38,10 @@ public class ControlaEvento {
 		dao.deletarEvento(nome);
 	};
 
-	public void atualizar(Evento e)throws SQLException{
+	public void atualizar(Evento e,String nome)throws SQLException{
 
 
-		dao.atualizarEvento(e);
+		dao.atualizarEvento(e,nome);
 	}
 
 
