@@ -32,8 +32,9 @@ public class TelaInicial extends JFrame {
 			public void run() {
 				try {
 					TelaInicial frame = new TelaInicial();
-					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+					
 					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,9 +43,7 @@ public class TelaInicial extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public TelaInicial() {
 		setTitle("Controle de Eventos");
 		
