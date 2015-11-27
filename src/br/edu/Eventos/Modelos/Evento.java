@@ -22,8 +22,8 @@ public class Evento {
 	private String auditorio;
 
 	private String observacao;
-	
-	
+
+
 	public String getNome() {
 		return Nome;
 	}
@@ -78,13 +78,13 @@ public class Evento {
 	public void setHoraFim(String horaFim) {
 		this.horaFim = horaFim;
 	}
-	
+
 	public String getObservacao() {
 		return observacao;
 	}
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
-	
+
+
 }
