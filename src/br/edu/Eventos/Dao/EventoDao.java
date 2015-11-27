@@ -2,6 +2,7 @@ package br.edu.Eventos.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -15,8 +16,8 @@ public class EventoDao {
 		Connection con = ControlaBanco.createConnection();
 		String sql = "INSERT INTO evento " +
 				"(nome,solicitante,setor,ramal,data,local,"
-				+   "prioridade,horainicio,horafim,observacao) " +
-				"values (?,?,?,?,?,?,?,?,?,?)";
+				+   "prioridade,horainicio,horafim,observacao,mouse,passador,funcionario,sala) " +
+				"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement smt = con.prepareStatement(sql);
 		smt.setString(1, e.getNome());
 		smt.setString(2, e.getSolicitante());
@@ -31,6 +32,10 @@ public class EventoDao {
 		smt.setString(8, e.getHoraInicio());
 		smt.setString(9, e.getHoraFim());
 		smt.setString(10, e.getObservacao());
+		smt.setBoolean(11, e.isMicrofone());
+		smt.setBoolean(12, e.isPassador());
+		smt.setString(13, e.getFuncionario());
+		smt.setString(14, e.getSala());
 
 
 
@@ -57,5 +62,18 @@ public class EventoDao {
 		PreparedStatement smt = con.prepareStatement(sql);
 		JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 
+	}
+	public ResultSet mostra(String cond,String valor) throws SQLException{
+		Connection con = ControlaBanco.createConnection();
+		String sql ="SELECT * FROM evento WHERE +"+cond+" = ?";
+		PreparedStatement smt = con.prepareStatement(sql);
+		smt.setString(1, valor);
+		
+		ResultSet resultado = smt.executeQuery();
+		
+		
+		smt.execute();
+		smt.close();
+		return resultado;
 	}
 }

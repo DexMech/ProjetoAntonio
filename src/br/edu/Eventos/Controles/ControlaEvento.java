@@ -2,6 +2,7 @@ package br.edu.Eventos.Controles;
 
 
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -41,6 +42,19 @@ public class ControlaEvento {
 
 
 		dao.atualizarEvento(e);
+	}
+
+
+	public ResultSet mostra(String cond,String valor) {
+		ResultSet resultado = null;
+		try {
+			 resultado = dao.mostra(cond,valor);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+		
 	};
 
 

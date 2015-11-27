@@ -13,6 +13,35 @@ public class Evento {
 	private String prioridade;
 	private String horaInicio;
 	private String horaFim;
+	private String funcionario;
+	private boolean microfone;
+	private boolean passador;
+	private String  sala;
+	
+	public String getSala() {
+		return sala;
+	}
+	public void setSala(String sala) {
+		this.sala = sala;
+	}
+	public boolean isMicrofone() {
+		return microfone;
+	}
+	public void setMicrofone(boolean microfone) {
+		this.microfone = microfone;
+	}
+	public boolean isPassador() {
+		return passador;
+	}
+	public void setPassador(boolean passador) {
+		this.passador = passador;
+	}
+	public String getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(String funcionario) {
+		this.funcionario = funcionario;
+	}
 	public String getAuditorio() {
 		return auditorio;
 	}

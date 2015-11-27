@@ -15,9 +15,9 @@ public class itemdao {
 
 		Connection con = ControlaBanco.createConnection();
 		String sql = "INSERT INTO item " +
-				"(nome,solicitante,setor,ramal,data,local,"
-				+   "prioridade,horainicio,horafim,observacao) " +
-				"values (?,?,?,?,?,?,?,?,?,?)";
+				"(nome,ssesp,das,modelo,serial,observacao"
+				+") " +
+				"values (?,?,?,?,?,?)";
 		PreparedStatement smt = con.prepareStatement(sql);
 
 
